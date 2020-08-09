@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ com.wdkf.wdkfspringbootautoconfigure.config.wdkf.WdkfServiceAutoConfiguration,\
+ com.wdkf.wdkfspringbootautoconfigure.config.redis.RedisTestAutoConfigure
