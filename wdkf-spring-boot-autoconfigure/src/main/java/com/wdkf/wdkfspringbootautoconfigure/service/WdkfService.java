@@ -1,8 +1,6 @@
 package com.wdkf.wdkfspringbootautoconfigure.service;
 
-import com.wdkf.wdkfspringbootautoconfigure.config.wdkf.WdkfProperties;
 import com.wdkf.wdkfspringbootautoconfigure.properties.WdkfLocalBean;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

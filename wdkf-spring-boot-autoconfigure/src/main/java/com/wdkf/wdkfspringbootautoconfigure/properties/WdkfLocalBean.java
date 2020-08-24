@@ -19,7 +19,6 @@ import java.net.UnknownHostException;
 @Repository
 public class WdkfLocalBean {
 
-    private boolean flag;
 
     private String name;
 
@@ -27,4 +26,5 @@ public class WdkfLocalBean {
 
     private String port;
 
+    private String active;
 }

@@ -21,11 +21,10 @@ import java.net.UnknownHostException;
 
 //@ConfigurationProperties(prefix = "server")
 @Data
-@Repository
+@ConfigurationProperties(prefix = "server")
 public class HostConfig {
     private String url = InetAddress.getLocalHost().getHostAddress();
 
-    @Value("server.port")
     private String port;
 
     public HostConfig() throws UnknownHostException {

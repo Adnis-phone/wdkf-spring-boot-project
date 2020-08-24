@@ -2,6 +2,7 @@ package com.wdkf.wdkfspringbootautoconfigure.config.wdkf;
 
 import com.wdkf.wdkfspringbootautoconfigure.config.printhost.AppNameConfig;
 import com.wdkf.wdkfspringbootautoconfigure.config.printhost.HostConfig;
+import com.wdkf.wdkfspringbootautoconfigure.config.printhost.Profiles;
 import com.wdkf.wdkfspringbootautoconfigure.properties.WdkfLocalBean;
 import com.wdkf.wdkfspringbootautoconfigure.service.WdkfService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @ConditionalOnWebApplication
-@EnableConfigurationProperties(WdkfProperties.class)
+@EnableConfigurationProperties({AppNameConfig.class,HostConfig.class, Profiles.class})
 @ConditionalOnClass(WdkfLocalBean.class)
 public class WdkfServiceAutoConfiguration implements CommandLineRunner {
 
@@ -45,31 +46,23 @@ public class WdkfServiceAutoConfiguration implements CommandLineRunner {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "wdkf.starter.v", name = "flag", havingValue = "true")
-    public WdkfLocalBean defaultWdkfLocalBean(WdkfProperties wdkfProperties) {
+    public WdkfLocalBean defaultWdkfLocalBean(AppNameConfig appNameConfig, HostConfig hostConfig ,Profiles profiles) {
         WdkfLocalBean wdkfLocalBean = new WdkfLocalBean();
-        wdkfLocalBean.setFlag(wdkfProperties.isFlag());
-        wdkfLocalBean.setName(wdkfProperties.getName());
-        wdkfLocalBean.setPort(wdkfProperties.getPort());
-        wdkfLocalBean.setUrl(wdkfProperties.getUrl());
-//        if(wdkfProperties.isFlag()) {
-//            log.info("---------------------------------------框架版本：v0.2.1---------------------------------------");
-//            log.info("支持统一日志打印。。。");
-//            log.info("支持统一异常处理。。。");
-//            log.info("支持统一返回包装。。。");
-//            log.info("---------------------------------------框架版本：v0.2.1---------------------------------------");
-//        }
+        wdkfLocalBean.setName(appNameConfig.getName());
+        wdkfLocalBean.setPort(hostConfig.getPort());
+        wdkfLocalBean.setUrl(hostConfig.getUrl());
+        wdkfLocalBean.setActive(profiles.getActive());
         return wdkfLocalBean;
     }
 
     @Override
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "wdkf.starter.v", name = "flag", havingValue = "true")
     public void run(String... args) throws Exception {
         System.out.println("----------------------------------------------------------");
         System.out.println("\tApplication '"+wdkfLocalBean.getName()+"' is running! Access URLs:");
         System.out.println("\tLocal: \t\thttp://localhost:"+wdkfLocalBean.getPort());
         System.out.println("\tExternal: \thttp://"+wdkfLocalBean.getUrl()+":"+wdkfLocalBean.getPort());
+        System.out.println("\tProfile(s): \t\t["+wdkfLocalBean.getActive()+"]");
         System.out.println("----------------------------------------------------------");
     }
 
