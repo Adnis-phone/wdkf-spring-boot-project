@@ -70,12 +70,4 @@ public class RedisTestAutoConfigure {
         redisTemplate.setConnectionFactory(taskConnectionFactory());
         return redisTemplate;
     }
-
-/*    @Bean
-    @ConditionalOnMissingBean(StringRedisTemplate.class)
-    public StringRedisTemplate stringRedisTemplate() {
-        StringRedisTemplate template = new StringRedisTemplate();
-        template.setConnectionFactory(taskConnectionFactory());
-        return template;
-    }*/
 }
