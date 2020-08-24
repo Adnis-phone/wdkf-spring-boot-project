@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,7 +21,7 @@ import java.net.UnknownHostException;
 
 //@ConfigurationProperties(prefix = "server")
 @Data
-@Component
+@Repository
 public class HostConfig {
     private String url = InetAddress.getLocalHost().getHostAddress();
 

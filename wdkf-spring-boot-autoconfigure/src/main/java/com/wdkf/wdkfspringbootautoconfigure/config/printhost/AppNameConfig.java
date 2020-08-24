@@ -3,6 +3,7 @@ package com.wdkf.wdkfspringbootautoconfigure.config.printhost;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @ProjectName: wdkf-spring-boot-project
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 //@ConfigurationProperties(prefix = "spring.application")
 @Data
-@Component
+@Repository
 public class AppNameConfig {
 
     @Value("spring.application.name")

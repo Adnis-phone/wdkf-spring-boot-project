@@ -1,6 +1,10 @@
 package com.wdkf.wdkfspringbootautoconfigure.properties;
 
+import lombok.Data;
 import org.springframework.stereotype.Repository;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * @ProjectName: wdkf-spring-boot-project
@@ -11,22 +15,16 @@ import org.springframework.stereotype.Repository;
  * @Date: 2020/8/4 17:21
  * @Version: 1.0
  */
+@Data
 @Repository
 public class WdkfLocalBean {
+
     private boolean flag;
 
-    public boolean isFlag() {
-        return flag;
-    }
+    private String name;
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
+    private String url;
 
-    @Override
-    public String toString() {
-        return "WdkfProperties{" +
-                "flag=" + flag +
-                '}';
-    }
+    private String port;
+
 }

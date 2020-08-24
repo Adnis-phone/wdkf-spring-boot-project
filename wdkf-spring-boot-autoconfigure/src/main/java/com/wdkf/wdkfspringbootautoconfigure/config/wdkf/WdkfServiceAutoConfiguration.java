@@ -31,14 +31,9 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass(WdkfLocalBean.class)
 public class WdkfServiceAutoConfiguration implements CommandLineRunner {
 
-    @Autowired(required = false)
+    @Autowired
     private WdkfLocalBean wdkfLocalBean;
 
-    @Autowired(required = false)
-    private AppNameConfig appNameConfig;
-
-    @Autowired(required = false)
-    private HostConfig hostConfig;
 
 
     @Bean
@@ -54,23 +49,27 @@ public class WdkfServiceAutoConfiguration implements CommandLineRunner {
     public WdkfLocalBean defaultWdkfLocalBean(WdkfProperties wdkfProperties) {
         WdkfLocalBean wdkfLocalBean = new WdkfLocalBean();
         wdkfLocalBean.setFlag(wdkfProperties.isFlag());
-        if(wdkfProperties.isFlag()) {
-            log.info("---------------------------------------框架版本：v0.2.1---------------------------------------");
-            log.info("支持统一日志打印。。。");
-            log.info("支持统一异常处理。。。");
-            log.info("支持统一返回包装。。。");
-            log.info("---------------------------------------框架版本：v0.2.1---------------------------------------");
-        }
+        wdkfLocalBean.setName(wdkfProperties.getName());
+        wdkfLocalBean.setPort(wdkfProperties.getPort());
+        wdkfLocalBean.setUrl(wdkfProperties.getUrl());
+//        if(wdkfProperties.isFlag()) {
+//            log.info("---------------------------------------框架版本：v0.2.1---------------------------------------");
+//            log.info("支持统一日志打印。。。");
+//            log.info("支持统一异常处理。。。");
+//            log.info("支持统一返回包装。。。");
+//            log.info("---------------------------------------框架版本：v0.2.1---------------------------------------");
+//        }
         return wdkfLocalBean;
     }
 
     @Override
     @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = "wdkf.starter.v", name = "flag", havingValue = "true")
     public void run(String... args) throws Exception {
         System.out.println("----------------------------------------------------------");
-        System.out.println("\tApplication '"+appNameConfig.getName()+"' is running! Access URLs:");
-        System.out.println("\tLocal: \t\thttp://localhost:"+hostConfig.getPort());
-        System.out.println("\tExternal: \thttp://"+hostConfig.getUrl()+":"+hostConfig.getPort());
+        System.out.println("\tApplication '"+wdkfLocalBean.getName()+"' is running! Access URLs:");
+        System.out.println("\tLocal: \t\thttp://localhost:"+wdkfLocalBean.getPort());
+        System.out.println("\tExternal: \thttp://"+wdkfLocalBean.getUrl()+":"+wdkfLocalBean.getPort());
         System.out.println("----------------------------------------------------------");
     }
 
