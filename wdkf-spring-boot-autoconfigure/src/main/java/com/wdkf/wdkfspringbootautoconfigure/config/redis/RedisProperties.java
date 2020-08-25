@@ -1,6 +1,7 @@
 package com.wdkf.wdkfspringbootautoconfigure.config.redis;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisProperties {
 
+    private Config config = new Config();
+
     private String host;
 
     private int port;
@@ -25,7 +28,5 @@ public class RedisProperties {
     private String pass;
 
     private int db;
-
-    private Config config;
 
 }

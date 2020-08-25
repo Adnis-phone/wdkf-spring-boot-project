@@ -1,6 +1,8 @@
 package com.wdkf.wdkfspringbootautoconfigure.config.redis;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @ProjectName: wdkf-spring-boot-project
@@ -14,14 +16,14 @@ import lombok.Data;
 @Data
 public class Config {
 
-    private String timeout;
-    private int maxTotal;
-    private int maxIdle;
-    private int maxWaitMillis;
-    private String minEvictableIdleTimeMillis;
-    private int numTestsPerEvictionRun;
-    private String timeBetweenEvictionRunsMillis;
-    private Boolean testOnBorrow;
-    private Boolean testWhileIdle;
+    private String timeout = "10000";
+    private int maxTotal = 100;
+    private int maxIdle = 10;
+    private int maxWaitMillis = 100000;
+    private String minEvictableIdleTimeMillis = "60000";
+    private int numTestsPerEvictionRun = -1;
+    private String timeBetweenEvictionRunsMillis = "30000";
+    private Boolean testOnBorrow = true;
+    private Boolean testWhileIdle = true;
 
 }
