@@ -1,4 +1,4 @@
-package com.wdkf.wdkfspringbootautoconfigure.utils.page;
+package com.wdkf.wdkfspringbootutils.page;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.wdkf.wdkfspringbootautoconfigure.utils.page;
+package com.wdkf.wdkfspringbootutils.page;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,14 +28,21 @@ public class PageUtil {
      * @Date 2020/7/1 21:31
      * @Version: 1.0
      */
-    public <T> PageODTO pageInfo(PageIDTO pageIDTO) {
+    public <T> PageODTO pageInfo(PageIDTO pageIDTO) throws Exception {
+        PageODTO pageODTO = new PageODTO();
         //1.检验入参
-        pageIDTO.validate();
+        if(pageIDTO.getPageNum() == null) {
+            return pageODTO;
+        }
+        if(pageIDTO.getPageSize() == null) {
+            pageODTO.setPageNum(pageIDTO.getPageNum());
+            return pageODTO;
+        }
         //2.初始化入参
         Integer pageSize = pageIDTO.getPageSize();
         Integer pageNum = pageIDTO.getPageNum();
         List<T> list = pageIDTO.getList();
-        PageODTO pageODTO = new PageODTO();
+
         if (!CollectionUtils.isEmpty(list)) {
             //3. 计算分页参数
             int start = (pageNum - 1) * pageSize;

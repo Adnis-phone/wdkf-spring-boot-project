@@ -36,6 +36,7 @@
         <module>wdkf-spring-boot-autoconfigure</module>
         <module>wdkf-spring-boot-parent</module>
         <module>wdkf-spring-boot-starter</module>
+        <module>wdkf-spring-boot-utils</module>
     </modules>
 
 

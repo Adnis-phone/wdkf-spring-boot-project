@@ -1,4 +1,4 @@
-package com.wdkf.wdkfspringbootautoconfigure.utils.validator;
+package com.wdkf.wdkfspringbootutils.validator;
 
 /**
  * @ProjectName: frist_dome

@@ -3,6 +3,7 @@ package com.wdkf.wdkfspringbootautoconfigure.utils.common;
 import com.wdkf.wdkfspringbootautoconfigure.utils.myenum.MyException;
 import com.wdkf.wdkfspringbootautoconfigure.utils.myenum.ReturnMsg;
 import com.wdkf.wdkfspringbootautoconfigure.utils.redis.RedisUtil;
+import com.wdkf.wdkfspringbootutils.structuretransform.ObjectToMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -35,6 +35,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <!--lombok 插件-->
         <dependency>
             <groupId>org.projectlombok</groupId>
