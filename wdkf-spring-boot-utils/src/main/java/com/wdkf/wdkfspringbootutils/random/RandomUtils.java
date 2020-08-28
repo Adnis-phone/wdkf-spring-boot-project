@@ -24,10 +24,10 @@ public class RandomUtils {
      * @Params: [length, ascil]
      * @Return: java.lang.String
      */
-    private String randomNumberAndCase(Integer length,Integer falg){
+    private String randomNumberAndCase(Integer length,Integer flag){
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
-        if (falg == 0){//falg=0小写
+        if (flag == 0){//falg=0小写
             for (int i = 0; i < length; i++) {
                 boolean b = random.nextBoolean();
                 if(b){
@@ -37,7 +37,7 @@ public class RandomUtils {
                     sb.append(random.nextInt(10));
                 }
             }
-        }else if (falg == 1){//falg=1大写
+        }else if (flag == 1){//falg=1大写
             for (int i = 0; i < length; i++) {
                 boolean b = random.nextBoolean();
                 if(b){
