@@ -2,6 +2,9 @@ package com.wdkf.wdkfspringbootutils.random;
 
 import com.wdkf.wdkfspringbootutils.file.FileUtils;
 import com.wdkf.wdkfspringbootutils.random.name.AreaCode;
+import com.wdkf.wdkfspringbootutils.random.name.FirstName;
+import com.wdkf.wdkfspringbootutils.random.name.SecondName;
+import com.wdkf.wdkfspringbootutils.random.name.ThirdName;
 import lombok.extern.slf4j.Slf4j;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -477,17 +480,11 @@ public class RandomUtils {
      * @Version:  1.0
      */
     public static String randomUserName() {
-
-
-
-        List<String> firstList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
-        List<String> secondList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
-        List<String> thirdList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
-        int randomFirst = new Random().nextInt(firstList.size());
-        int secondRandom = new Random().nextInt(secondList.size());
-        int thirdRandom = new Random().nextInt(thirdList.size());
+        int firstRandom = new Random().nextInt(FirstName.firstname.length);
+        int secondRandom = new Random().nextInt(SecondName.secondname.length);
+        int thirdRandom = new Random().nextInt(ThirdName.thirdname.length);
         StringBuilder sb = new StringBuilder();
-        return sb.append(firstList.get(randomFirst)).append(secondList.get(secondRandom)).append(thirdList.get(thirdRandom)).toString();
+        return sb.append(FirstName.firstname[firstRandom]).append(SecondName.secondname[secondRandom]).append(ThirdName.thirdname[thirdRandom]).toString();
     }
     /**
      * @Method: randomUserName
@@ -500,15 +497,8 @@ public class RandomUtils {
      */
     public static String[] randomUserName(Integer size) {
         HashSet<String> hashSet = new HashSet<>();
-        List<String> firstList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
-        List<String> secondList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
-        List<String> thirdList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
         while(hashSet.size()<=size){
-            int randomFirst = new Random().nextInt(firstList.size());
-            int secondRandom = new Random().nextInt(secondList.size());
-            int thirdRandom = new Random().nextInt(thirdList.size());
-            StringBuilder sb = new StringBuilder();
-            hashSet.add(sb.append(firstList.get(randomFirst)).append(secondList.get(secondRandom)).append(thirdList.get(thirdRandom)).toString());
+            hashSet.add(randomUserName());
         }
         return hashSet.toArray(new String[hashSet.size()]);
     }
