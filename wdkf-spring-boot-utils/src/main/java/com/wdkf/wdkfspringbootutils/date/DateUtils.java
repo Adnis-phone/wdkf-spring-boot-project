@@ -2,6 +2,7 @@ package com.wdkf.wdkfspringbootutils.date;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -95,8 +96,14 @@ public class DateUtils {
      * @Date 2020/8/27 14:29
      * @Version:  1.0
      */
-    public  static Long dateStringToLong(String date) throws Exception {
-        return dateStringToLong(date,"yyyy-MM-dd HH:mm:ss");
+    public  static Long dateStringToLong(String date) {
+        Long l = 0L;
+        try {
+            l = dateStringToLong(date,"yyyy-MM-dd HH:mm:ss");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return l;
     }
 
     /**
@@ -109,15 +116,16 @@ public class DateUtils {
      * @Date 2020/8/28 10:15
      * @Version:  1.0
      */
-    public  static Long dateStringToLong(String date, String form) throws Exception {
-
+    public  static Long dateStringToLong(String date, String form) {
+        Long l = 0L;
         //设定入参时间格式
         SimpleDateFormat format = new SimpleDateFormat(form);
         try {
-            return format.parse(date).getTime();
+            l =  format.parse(date).getTime();
         } catch (Exception pe) {
-            throw new Exception("时间格式不匹配！");
+            pe.printStackTrace();
         }
+        return l;
     }
 
     /**
@@ -130,8 +138,14 @@ public class DateUtils {
      * @Date 2020/8/27 17:08
      * @Version:  1.0
      */
-    public  static String timeShift(String date) throws Exception {
-        return timeShift(date,"yyyy-MM-dd HH:mm:ss",true);
+    public  static String timeShift(String date) {
+        String S = null;
+        try {
+            S = timeShift(date,"yyyy-MM-dd HH:mm:ss",true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return S;
     }
 
     /**
@@ -145,8 +159,14 @@ public class DateUtils {
      * @Date 2020/8/27 17:08
      * @Version:  1.0
      */
-    public  static String timeShift(String date, String form) throws Exception {
-        return timeShift(date ,form,true);
+    public  static String timeShift(String date, String form) {
+        String S = null;
+        try {
+            S = timeShift(date ,form,true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return S;
     }
 
     /**
@@ -161,7 +181,7 @@ public class DateUtils {
      * @Date 2020/8/27 17:08
      * @Version:  1.0
      */
-    public  static String timeShift(String date, String form, boolean flag) throws Exception {
+    public  static String timeShift(String date, String form, boolean flag) {
         Random r = new Random();
         int number = r.nextInt(999999999);
         Long time = dateStringToLong(date,form);
@@ -184,8 +204,14 @@ public class DateUtils {
      * @Date 2020/8/28 10:24
      * @Version:  1.0
      */
-    public  static String timeShift(String date, int number, String item) throws Exception {
-        return timeShift(date, "yyyy-MM-dd HH:mm:ss",number, item, true);
+    public  static String timeShift(String date, int number, String item) {
+        String S = null;
+        try {
+            S = timeShift(date, "yyyy-MM-dd HH:mm:ss",number, item, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return S;
     }
 
     /**
@@ -200,8 +226,14 @@ public class DateUtils {
      * @Date 2020/8/28 10:26
      * @Version:  1.0
      */
-    public  static String timeShift(String date, String form, int number, String item) throws Exception {
-        return timeShift(date, form,number, item, true);
+    public  static String timeShift(String date, String form, int number, String item) {
+        String S = null;
+        try {
+            S = timeShift(date, form,number, item, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return S;
     }
 
     /**
@@ -217,27 +249,35 @@ public class DateUtils {
      * @Date 2020/8/28 10:26
      * @Version:  1.0
      */
-    public  static String timeShift(String date, String form, int number, String item, boolean flag) throws Exception {
+    public  static String timeShift(String date, String form, int number, String item, boolean flag){
+        String S = null;
         try {
             switch (item) {
                 case "years":
-                    return timeShift(date,form,number,0,0,0,0,0,flag);
+                    S =  timeShift(date,form,number,0,0,0,0,0,flag);
+                    break;
                 case "months":
-                    return timeShift(date,form,0,number,0,0,0,0,flag);
+                    S =  timeShift(date,form,0,number,0,0,0,0,flag);
+                    break;
                 case "days":
-                    return timeShift(date,form,0,0,number,0,0,0,flag);
+                    S =  timeShift(date,form,0,0,number,0,0,0,flag);
+                    break;
                 case "hours":
-                    return timeShift(date,form,0,0,0,number,0,0,flag);
+                    S =  timeShift(date,form,0,0,0,number,0,0,flag);
+                    break;
                 case "minutes":
-                    return timeShift(date,form,0,0,0,0,number,0,flag);
+                    S =  timeShift(date,form,0,0,0,0,number,0,flag);
+                    break;
                 case "seconds":
-                    return timeShift(date,form,0,0,0,0,0,number,flag);
+                    S =  timeShift(date,form,0,0,0,0,0,number,flag);
+                    break;
                 default:
                     throw new Exception("Please input one of years, months, days, hours, minutes or seconds! ");
             }
-        } catch (Exception ignored) {
-            throw new Exception("Please input one of years, months, days, hours, minutes or seconds! ");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return S;
     }
 
     /**
@@ -257,31 +297,39 @@ public class DateUtils {
      * @Date 2020/8/28 10:29
      * @Version:  1.0
      */
-    public  static String timeShift(String date, String form, Integer years, Integer months, Integer days, Integer hours, Integer minutes, Integer seconds, boolean flag) throws Exception {
+    public  static String timeShift(String date, String form, Integer years, Integer months, Integer days, Integer hours, Integer minutes, Integer seconds, boolean flag) {
         //定义返回时间
         String resDate = "";
         long resTime = dateStringToLong(date,form);
         SimpleDateFormat sdf = new SimpleDateFormat(form);
-        Date dt = sdf.parse(date);
-        Calendar rightNow = Calendar.getInstance();
-        rightNow.setTime(dt);
-        if(!flag) {
-
-            //减少变换
-            years   = -years;
-            months  = -months;
-            days    = -days;
-            hours   = -hours;
-            minutes = -minutes;
-            seconds = -seconds;
+        Date dt = null;
+        try {
+            dt = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        rightNow.add(Calendar.YEAR, years);
-        rightNow.add(Calendar.MONTH, months);
-        rightNow.add(Calendar.DATE, days);
-        rightNow.add(Calendar.HOUR, hours);
-        rightNow.add(Calendar.MINUTE, minutes);
-        rightNow.add(Calendar.SECOND, seconds);
-        Date dt1 = rightNow.getTime();
-        return sdf.format(dt1);
+        if(null != dt) {
+            Calendar rightNow = Calendar.getInstance();
+            rightNow.setTime(dt);
+            if(!flag) {
+
+                //减少变换
+                years   = -years;
+                months  = -months;
+                days    = -days;
+                hours   = -hours;
+                minutes = -minutes;
+                seconds = -seconds;
+            }
+            rightNow.add(Calendar.YEAR, years);
+            rightNow.add(Calendar.MONTH, months);
+            rightNow.add(Calendar.DATE, days);
+            rightNow.add(Calendar.HOUR, hours);
+            rightNow.add(Calendar.MINUTE, minutes);
+            rightNow.add(Calendar.SECOND, seconds);
+            Date dt1 = rightNow.getTime();
+            return sdf.format(dt1);
+        }
+        return null;
     }
 }
