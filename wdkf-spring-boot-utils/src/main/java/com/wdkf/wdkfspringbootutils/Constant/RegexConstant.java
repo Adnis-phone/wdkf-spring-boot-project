@@ -8,4 +8,6 @@ package com.wdkf.wdkfspringbootutils.Constant;
 public class RegexConstant {
     public static final String NUM_0_9 = "^[0-9]*$";
 
+    public static final String PUNCTUATION = "[\\p{P}+~$`^=|<>～｀＄＾＋＝｜＜＞￥×\\s]";
+
 }
