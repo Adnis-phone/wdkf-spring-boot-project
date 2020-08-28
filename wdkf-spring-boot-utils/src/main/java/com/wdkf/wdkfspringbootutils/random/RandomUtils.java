@@ -1,6 +1,7 @@
 package com.wdkf.wdkfspringbootutils.random;
 
 import com.wdkf.wdkfspringbootutils.file.FileUtils;
+import com.wdkf.wdkfspringbootutils.random.name.AreaCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
@@ -350,18 +351,126 @@ public class RandomUtils {
     }
 
     /**
+     * 随机地区
+     *
+     * @return
+     */
+    private static int randomAreaCode() {
+        int index = (int) (Math.random() * AreaCode.areaCode.size());
+        Collection<Integer> values = AreaCode.areaCode.values();
+        Iterator<Integer> it = values.iterator();
+        int i = 0;
+        int code = 0;
+        while (i < index && it.hasNext()) {
+            i++;
+            code = it.next();
+        }
+        return code;
+    }
+
+    /**
+     * 随机出生日期
+     *
+     * @return
+     */
+    private static String randomBirthday() {
+        Calendar birthday = Calendar.getInstance();
+        birthday.set(Calendar.YEAR, (int) (Math.random() * 60) + 1950);
+        birthday.set(Calendar.MONTH, (int) (Math.random() * 12));
+        birthday.set(Calendar.DATE, (int) (Math.random() * 31));
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(birthday.get(Calendar.YEAR));
+        long month = birthday.get(Calendar.MONTH) + 1;
+        if (month < 10) {
+            builder.append("0");
+        }
+        builder.append(month);
+        long date = birthday.get(Calendar.DATE);
+        if (date < 10) {
+            builder.append("0");
+        }
+        builder.append(date);
+        return builder.toString();
+    }
+
+    /*
+     * <p>18位身份证验证</p> 根据〖中华人民共和国国家标准 GB
+     * 11643-1999〗中有关公民身份号码的规定，公民身份号码是特征组合码，由十七位数字本体码和一位数字校验码组成。
+     * 排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。 第十八位数字(校验码)的计算方法为：
+     * 1.将前面的身份证号码17位数分别乘以不同的系数。从第一位到第十七位的系数分别为：7 9 10 5 8 4 2 1 6 3 7 9 10 5 8
+     * 4 2 2.将这17位数字和系数相乘的结果相加。 3.用加出来和除以11，看余数是多少？ 4.余数只可能有0 1 2 3 4 5 6 7 8 9
+     * 10这11个数字。其分别对应的最后一位身份证的号码为1 0 X 9 8 7 6 5 4 3 2。
+     * 5.通过上面得知如果余数是2，就会在身份证的第18位数字上出现罗马数字的Ⅹ。如果余数是10，身份证的最后一位号码就是2。
+     */
+    private static char calcTrailingNumber(char[] chars) {
+        if (chars.length < 17) {
+            return ' ';
+        }
+        int[] c = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
+        char[] r = {'1', '0', 'X', '9', '8', '7', '6','5', '4', '3', '2' };
+        int[] n = new int[17];
+        int result = 0;
+        for (int i = 0; i < n.length; i++) {
+            n[i] = Integer.parseInt(chars[i] + "");
+        }
+        for (int i = 0; i < n.length; i++) {
+            result += c[i] * n[i];
+        }
+        return r[result % 11];
+    }
+
+    /**
+     * 随机产生3位数
+     *
+     * @return
+     */
+    private static String randomCode() {
+        int code = (int) (Math.random() * 1000);
+        if (code < 10) {
+            return "00" + code;
+        } else if (code < 100) {
+            return "0" + code;
+        } else {
+            return "" + code;
+        }
+    }
+
+    /**
+     * @Method: randomIDNumber
+     * @Description: 随机生成身份证号码
+     * @param
+     * @Return: java.lang.String
+     * @Author: chenlu
+     * @Date 2020/8/27 15:08
+     * @Version:  1.0
+     */
+    public static String randomIDNumber() {
+        StringBuilder generater = new StringBuilder();
+        generater.append(randomAreaCode());
+        generater.append(randomBirthday());
+        generater.append(randomCode());
+        generater.append(calcTrailingNumber(generater.toString().toCharArray()));
+        return generater.toString();
+
+
+    }
+
+    /**
      * @Method: randomIDNumber
      * @Description: 随机生成身份证号码（不允许重复）
      * @param
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: chenlu
      * @Date 2020/8/27 15:08
      * @Version:  1.0
      */
-    public static String randomIDNumber() {}
-
     public static String[] randomIDNumber(Integer size) {
-
+        HashSet<String> hashSet = new HashSet<>();
+        while(hashSet.size()<size){
+            hashSet.add(randomIDNumber());
+        }
+        return hashSet.toArray(new String[hashSet.size()]);
     }
 
     /**
@@ -394,9 +503,9 @@ public class RandomUtils {
      */
     public static String[] randomUserName(Integer size) {
         HashSet<String> hashSet = new HashSet<>();
-        List<String> firstList = new FileUtils().fileToArray("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
-        List<String> secondList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
-        List<String> thirdList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
+        List<String> firstList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
+        List<String> secondList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
+        List<String> thirdList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
         while(hashSet.size()<=size){
             int randomFirst = new Random().nextInt(firstList.size());
             int secondRandom = new Random().nextInt(secondList.size());
@@ -404,7 +513,7 @@ public class RandomUtils {
             StringBuilder sb = new StringBuilder();
             hashSet.add(sb.append(firstList.get(randomFirst)).append(secondList.get(secondRandom)).append(thirdList.get(thirdRandom)).toString());
         }
-        return (String[])hashSet.toArray();
+        return hashSet.toArray(new String[hashSet.size()]);
     }
 
 }
