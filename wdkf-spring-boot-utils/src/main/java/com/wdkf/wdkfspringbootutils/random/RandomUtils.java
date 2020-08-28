@@ -477,6 +477,9 @@ public class RandomUtils {
      * @Version:  1.0
      */
     public static String randomUserName() {
+
+
+
         List<String> firstList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
         List<String> secondList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
         List<String> thirdList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
@@ -523,9 +526,10 @@ public class RandomUtils {
         StringBuilder result = new StringBuilder();
         result.append(randomNumbersAndLowercase(10));
         result.append("@");
-        result.append(randomNumbersAndLowercase(5));
-        result.append(".");
-        result.append(randomNumbersAndLowercase(3));
+        String[] suffix = {"@gmail.com","@yahoo.com","@msn.com","@hotmail.com","@aol.com","@ask.com",
+        "@live.com","@qq.com","@0355.net","@163.com","@163.net","@263.net","@3721.net","@yeah.net","@googlemail.com","@mail.com"};
+        int random = new Random().nextInt(suffix.length);
+        result.append(suffix[random]);
         return result.toString().toLowerCase();
     }
 
