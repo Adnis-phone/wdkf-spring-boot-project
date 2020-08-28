@@ -1,5 +1,6 @@
 package com.wdkf.wdkfspringbootutils.random;
 
+import com.wdkf.wdkfspringbootutils.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
@@ -22,12 +23,13 @@ public class RandomUtils {
 
     /**
      * @Author: 王品峰
-     * @Description: 传递随机大小写，falg :0小写，1大写，2大小写
-     * @DateTime: 2020/8/27 16:33
-     * @Params: [length, ascil]
+     * @Description: 随机大小写
+     * @DateTime: 2020/8/28 10:12
+     * @param length 长度
+     * @param flag 0小写，1大写，2大小写
      * @Return: java.lang.String
      */
-    private String randomNumberAndCase(Integer length,Integer flag){
+    private static String randomNumberAndCase(Integer length,Integer flag){
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
         if (flag == 0){//falg=0小写
@@ -67,22 +69,38 @@ public class RandomUtils {
     /**
      * @Method: randomNumbersAndLowercase
      * @Description: 数字和小写字母随机组合（指定长度）
-     * flag：是否允许重复；true允许重复
-     * @param length
+     * @param length 长度
      * @Return: java.lang.String
      * @Author: wangdehonga
      * @Date 2020/8/27 14:34
      * @Version:  1.0
      */
-    public String randomNumbersAndLowercase(Integer length) {
+    public static String randomNumbersAndLowercase(Integer length) {
         return randomNumberAndCase(length,0);
     }
 
-    public String[] randomNumbersAndLowercase(Integer length, Integer size) {
+    /**
+     * @Author: 王品峰
+     * @Description: 数字和小写字母随机组合（指定长度）
+     * @DateTime: 2020/8/28 10:15
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbersAndLowercase(Integer length, Integer size) {
         return randomNumbersAndLowercase(length,size,true);
     }
 
-    public String[] randomNumbersAndLowercase(Integer length, Integer size, boolean flag) {
+    /**
+     * @Author: 王品峰
+     * @Description: 数字和小写字母随机组合（指定长度）
+     * @DateTime: 2020/8/28 10:15
+     * @param flag 是否允许重复；true允许重复
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbersAndLowercase(Integer length, Integer size, boolean flag) {
         Set<String> set = new HashSet<String>();
         List<String> list = new ArrayList<String>();
         if (flag){
@@ -107,15 +125,32 @@ public class RandomUtils {
      * @Date 2020/8/27 14:35
      * @Version:  1.0
      */
-    public String randomNumbersAndUpcase(Integer length) {
+    public static String randomNumbersAndUpcase(Integer length) {
         return randomNumberAndCase(length,1);
     }
 
-    public String[] randomNumbersAndUpcase(Integer length, Integer size) {
+    /**
+     * @Author: 王品峰
+     * @Description: 数字和大写字母随机组合（指定长度）
+     * @DateTime: 2020/8/28 10:18
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbersAndUpcase(Integer length, Integer size) {
         return randomNumbersAndUpcase(length,size,true);
     }
 
-    public String[] randomNumbersAndUpcase(Integer length, Integer size, boolean flag) {
+    /**
+     * @Author: 王品峰
+     * @Description: 数字和大写字母随机组合（指定长度）
+     * @DateTime: 2020/8/28 10:18
+     * @param flag 是否允许重复；true允许重复
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbersAndUpcase(Integer length, Integer size, boolean flag) {
         Set<String> set = new HashSet<String>();
         List<String> list = new ArrayList<>();
         if (flag){
@@ -140,15 +175,32 @@ public class RandomUtils {
      * @Date 2020/8/27 14:36
      * @Version:  1.0
      */
-    public String randomNumbersAndLowerUpcase(Integer length) {
+    public static String randomNumbersAndLowerUpcase(Integer length) {
         return randomNumberAndCase(length,2);
     }
 
-    public String[] randomNumbersAndLowerUpcase(Integer length, Integer size) {
+    /**
+     * @Author: 王品峰
+     * @Description: 数字和大小写字母随机组合（指定长度）
+     * @DateTime: 2020/8/28 10:19
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbersAndLowerUpcase(Integer length, Integer size) {
         return randomNumbersAndLowerUpcase(length,size,true);
     }
 
-    public String[] randomNumbersAndLowerUpcase(Integer length, Integer size, boolean flag) {
+    /**
+     * @Author: 王品峰
+     * @Description: 数字和大小写字母随机组合（指定长度）
+     * @DateTime: 2020/8/28 10:19
+     * @param flag 是否允许重复；true允许重复
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbersAndLowerUpcase(Integer length, Integer size, boolean flag) {
         Set<String> set = new HashSet<String>();
         List<String> list = new ArrayList<>();
         if (flag){
@@ -173,7 +225,7 @@ public class RandomUtils {
      * @Date 2020/8/27 14:40
      * @Version:  1.0
      */
-    public String randomNumbers(Integer length) {
+    public static String randomNumbers(Integer length) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
 
@@ -183,11 +235,28 @@ public class RandomUtils {
         return sb.toString();
     }
 
-    public String[] randomNumbers(Integer length, Integer size) {
+    /**
+     * @Author: 王品峰
+     * @Description: 随机生成纯数字（指定长度）
+     * @DateTime: 2020/8/28 10:23
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbers(Integer length, Integer size) {
         return randomNumbers(length,size,true);
     }
 
-    public String[] randomNumbers(Integer length, Integer size, boolean flag) {
+    /**
+     * @Author: 王品峰
+     * @Description: 随机生成纯数字（指定长度）
+     * @DateTime: 2020/8/28 10:23
+     * @param flag 是否允许重复；true允许重复
+     * @param size 大小
+     * @param length 长度
+     * @Return: java.lang.String[]
+     */
+    public static String[] randomNumbers(Integer length, Integer size, boolean flag) {
         Set<String> set = new HashSet<String>();
         List<String> list = new ArrayList<String>();
         if (flag){
@@ -202,13 +271,6 @@ public class RandomUtils {
         return set.toArray(new String[set.size()]);
     }
 
-    private static long random(long begin,long end){
-        long rtn = begin + (long)(Math.random() * (end - begin));
-        if(rtn == begin || rtn == end){
-            return random(begin,end);
-        }
-        return rtn;
-    }
     /**
      * @Method: randomDate
      * @Description: 随机生成日期
@@ -218,12 +280,20 @@ public class RandomUtils {
      * @Date 2020/8/27 14:42
      * @Version:  1.0
      */
-    public String randomDate() {
+    public static String randomDate() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return randomDate("1970-01-01",format.format(new Date()));
     }
 
-    public String randomDate(String startDate, String endDate) {
+    /**
+     * @Author: 王品峰
+     * @Description: 随机生成日期
+     * @DateTime: 2020/8/28 10:25
+     * @param startDate 开始时间
+     * @param endDate 结束时间
+     * @Return: java.lang.String
+     */
+    public static String randomDate(String startDate, String endDate) {
         try {
             Random random = new Random();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -234,18 +304,37 @@ public class RandomUtils {
                 throw new Exception("开始时间需要小于结束时间");
             }
             long date = start.getTime() + (long)(Math.random() * (end.getTime() - start.getTime()));
-            return format.format(date);
+            return format2.format(date);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public String[] randomDate(String startDate, String endDate, Integer size) {
+    /**
+     * @Author: 王品峰
+     * @Description: 随机生成日期
+     * @DateTime: 2020/8/28 10:25
+     * @param startDate 开始时间
+     * @param endDate 结束时间
+     * @param size 大小
+     * @Return: java.lang.String
+     */
+    public static String[] randomDate(String startDate, String endDate, Integer size) {
         return randomDate(startDate, endDate, size, true);
     }
 
-    public String[] randomDate(String startDate, String endDate, Integer size, boolean flag) {
+    /**
+     * @Author: 王品峰
+     * @Description: 随机生成日期
+     * @DateTime: 2020/8/28 10:25
+     * @param startDate 开始时间
+     * @param endDate 结束时间
+     * @param size 大小
+     * @param flag true为可重复,false为不可重复
+     * @Return: java.lang.String
+     */
+    public static String[] randomDate(String startDate, String endDate, Integer size, boolean flag) {
         Set<String> set = new HashSet<String>();
         List<String> list = new ArrayList<>();
         if (flag){
@@ -269,38 +358,10 @@ public class RandomUtils {
      * @Date 2020/8/27 15:08
      * @Version:  1.0
      */
-    public String randomIDNumber() {}
+    public static String randomIDNumber() {}
 
-    public String[] randomIDNumber(Integer size) {
+    public static String[] randomIDNumber(Integer size) {
 
-    }
-
-    /**
-     * @Method: fileToArray
-     * @Description: 将文件内容转成数组
-     * @param
-     * @Return:
-     * @Author: chenlu
-     * @Date 2020/8/27 15:08
-     * @Version:  1.0
-     */
-    public  List<String> fileToArray(String files){
-        File file = new File(files);
-        List<String> resList = new ArrayList<>();
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
-            String s = null;
-            while((s = br.readLine())!=null){//使用readLine方法，一次读一行
-                String[] list =  s.split(" ");
-                for (int i = 0;i < list.length; i++){
-                    resList.add(list[i]);
-                }
-            }
-            br.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return resList;
     }
 
     /**
@@ -312,10 +373,10 @@ public class RandomUtils {
      * @Date 2020/8/27 15:13
      * @Version:  1.0
      */
-    public String randomUserName() {
-        List<String> firstList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
-        List<String> secondList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
-        List<String> thirdList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
+    public static String randomUserName() {
+        List<String> firstList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
+        List<String> secondList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
+        List<String> thirdList = FileUtils.fileToList("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
         int randomFirst = new Random().nextInt(firstList.size());
         int secondRandom = new Random().nextInt(secondList.size());
         int thirdRandom = new Random().nextInt(thirdList.size());
@@ -331,9 +392,9 @@ public class RandomUtils {
      * @Date 2020/8/27 15:13
      * @Version:  1.0
      */
-    public String[] randomUserName(Integer size) {
+    public static String[] randomUserName(Integer size) {
         HashSet<String> hashSet = new HashSet<>();
-        List<String> firstList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
+        List<String> firstList = new FileUtils().fileToArray("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
         List<String> secondList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
         List<String> thirdList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
         while(hashSet.size()<=size){

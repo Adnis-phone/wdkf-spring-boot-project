@@ -127,6 +127,7 @@ public class DateUtils {
         return timeShift(date ,form,true);
     }
 
+
     public String timeShift(String date, String form, boolean flag) throws Exception {
         Random r = new Random();
         int number = r.nextInt(999999999);
