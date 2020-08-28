@@ -166,8 +166,7 @@ public class DateUtils {
         int number = r.nextInt(999999999);
         Long time = dateStringToLong(date,form);
         if(!flag) {
-
-            //减少操作
+           //减少操作
             number = -number;
         }
         time += number;
@@ -285,5 +284,4 @@ public class DateUtils {
         Date dt1 = rightNow.getTime();
         return sdf.format(dt1);
     }
-
 }
