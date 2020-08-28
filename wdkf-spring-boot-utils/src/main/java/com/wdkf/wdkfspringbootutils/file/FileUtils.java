@@ -99,7 +99,7 @@ public class FileUtils {
                 while( contentLine != null) {
                     contentLine = contentLine.replaceAll("[\\p{P}+~$`^=|<>～｀＄＾＋＝｜＜＞￥×\\s]","");
                     if (!"".equals(contentLine)) {
-                        text.add(contentLine);
+                        text.add(contentLine+"\n");
                     }
                     contentLine = reader.readLine();
                 }
@@ -142,6 +142,7 @@ public class FileUtils {
                     if (!"".equals(tb.toString())) {
                         text.add(tb.toString());
                     }
+                    tb.append("\n");
                     contentLine = reader.readLine();
                 }
             }catch (IOException ioe) {
