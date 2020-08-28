@@ -68,7 +68,7 @@ public class RandomUtils {
      * @Description: 数字和小写字母随机组合（指定长度）
      * @param length 长度
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: 王品峰
      * @Date 2020/8/27 14:34
      * @Version:  1.0
      */
@@ -118,7 +118,7 @@ public class RandomUtils {
      * flag：是否允许重复；true允许重复
      * @param length
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: 王品峰
      * @Date 2020/8/27 14:35
      * @Version:  1.0
      */
@@ -168,7 +168,7 @@ public class RandomUtils {
      * flag：是否允许重复；true允许重复
      * @param length
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: 王品峰
      * @Date 2020/8/27 14:36
      * @Version:  1.0
      */
@@ -218,7 +218,7 @@ public class RandomUtils {
      * flag：是否允许重复；true允许重复
      * @param length
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: 王品峰
      * @Date 2020/8/27 14:40
      * @Version:  1.0
      */
@@ -273,7 +273,7 @@ public class RandomUtils {
      * @Description: 随机生成日期
      * @param
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: 王品峰
      * @Date 2020/8/27 14:42
      * @Version:  1.0
      */
