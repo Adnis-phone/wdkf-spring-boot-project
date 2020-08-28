@@ -1,4 +1,4 @@
-package com.wdkf.wdkfspringbootutils.Constant;
+package com.wdkf.wdkfspringbootutils.constant;
 
 import lombok.extern.slf4j.Slf4j;
 
