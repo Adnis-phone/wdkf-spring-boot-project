@@ -24,7 +24,7 @@ public class RandomUtils {
 
     /**
      * @Author: 王品峰
-     * @Description: 随机大小写
+     * @Description: 随机大小写+数字
      * @DateTime: 2020/8/28 10:12
      * @param length 长度
      * @param flag 0小写，1大写，2大小写
@@ -33,7 +33,7 @@ public class RandomUtils {
     private static String randomNumberAndCase(Integer length,Integer flag){
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
-        if (flag == 0){//falg=0小写
+        if (flag == 0){//flag=0小写
             for (int i = 0; i < length; i++) {
                 boolean b = random.nextBoolean();
                 if(b){
@@ -43,7 +43,7 @@ public class RandomUtils {
                     sb.append(random.nextInt(10));
                 }
             }
-        }else if (flag == 1){//falg=1大写
+        }else if (flag == 1){//flag=1大写
             for (int i = 0; i < length; i++) {
                 boolean b = random.nextBoolean();
                 if(b){
@@ -53,7 +53,7 @@ public class RandomUtils {
                     sb.append(random.nextInt(10));
                 }
             }
-        }else {//falg=2大小写
+        }else {//flag=2大小写
             for (int i = 0; i < length; i++) {
                 boolean b = random.nextBoolean();
                 if(b){
