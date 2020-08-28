@@ -38,6 +38,16 @@ public class FileUtils {
         return resList;
     }
 
+    /**
+     * @Method: fileToArray
+     * @Description: 将list写入文件
+     * @param list 写入的数据
+     * @param path 文件路径
+     * @Return:
+     * @Author: chenlu
+     * @Date 2020/8/27 15:08
+     * @Version:  1.0
+     */
     public static void ListToFile(List<String> list,String path){
         File file = new File(path);
         List<String> resList = new ArrayList<>();
@@ -53,4 +63,96 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+//    BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+//            try {
+//        text.forEach(t -> {
+//            try {
+//                writer.write(t);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }catch (Exception e) {
+//        throw new IOException("写入文件错误");
+//    } finally {
+//        writer.close();
+//    }
+
+    /**
+     * @Method: fileFormattingChinese
+     * @Description: 将文件格式化成仅汉字无符号
+     * @param path 文件路径
+     * @Return: void
+     * @Author: wangdehonga
+     * @Date 2020/8/28 11:25
+     * @Version:  1.0
+     */
+    public static void fileFormattingChinese(String path) {
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            List<String> text = new ArrayList<>();
+            try {
+                String contentLine = reader.readLine();
+                while( contentLine != null) {
+                    contentLine = contentLine.replaceAll("[\\p{P}+~$`^=|<>～｀＄＾＋＝｜＜＞￥×\\s]","");
+                    if (!"".equals(contentLine)) {
+                        text.add(contentLine);
+                    }
+                    contentLine = reader.readLine();
+                }
+            }catch (IOException ioe) {
+                throw new IOException("读取文件错误");
+            }finally {
+                reader.close();
+            }
+            ListToFile(text,path);
+        } catch (IOException o) {
+            o.printStackTrace();
+        }
+    }
+
+    /**
+     * @Method: fileChineseSpaceTabulation
+     * @Description: 将初始化后的纯汉字文本用reglx格式化制表
+     * @param path 文件路径
+     * @param reglx 分隔符
+     * @Return: void
+     * @Author: wangdehonga
+     * @Date 2020/8/28 14:13
+     * @Version:  1.0
+     */
+    public static void fileChineseSpaceTabulation(String path, String reglx) {
+        fileFormattingChinese(path);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            List<String> text = new ArrayList<>();
+            try {
+                String contentLine = reader.readLine();
+                while( contentLine != null) {
+                    StringBuffer tb = new StringBuffer();
+                    for (int i = 0; i < contentLine.length(); i++) {
+                        tb.append(contentLine.charAt(i));
+                        if (i < contentLine.length() - 1) {
+                            tb.append(reglx);
+                        }
+                    }
+                    if (!"".equals(tb.toString())) {
+                        text.add(tb.toString());
+                    }
+                    contentLine = reader.readLine();
+                }
+            }catch (IOException ioe) {
+                throw new IOException("读取文件错误");
+            }finally {
+                reader.close();
+            }
+            ListToFile(text,path);
+        } catch (IOException o) {
+            o.printStackTrace();
+        }
+    }
+
 }
