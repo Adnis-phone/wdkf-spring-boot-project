@@ -3,10 +3,6 @@ package com.wdkf.wdkfspringbootutils.random;
 import com.wdkf.wdkfspringbootutils.file.FileUtils;
 import com.wdkf.wdkfspringbootutils.random.name.AreaCode;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -452,14 +448,12 @@ public class RandomUtils {
         generater.append(randomCode());
         generater.append(calcTrailingNumber(generater.toString().toCharArray()));
         return generater.toString();
-
-
     }
 
     /**
      * @Method: randomIDNumber
      * @Description: 随机生成身份证号码（不允许重复）
-     * @param
+     * @param size 随机生成身份证号个数
      * @Return: java.lang.String
      * @Author: chenlu
      * @Date 2020/8/27 15:08
@@ -495,7 +489,7 @@ public class RandomUtils {
     /**
      * @Method: randomUserName
      * @Description: 随机生成中文名字（不允许重复）
-     * @param
+     * @param size 随机生成中文名字个数
      * @Return: java.lang.String
      * @Author: chenlu
      * @Date 2020/8/27 15:13
@@ -512,6 +506,42 @@ public class RandomUtils {
             int thirdRandom = new Random().nextInt(thirdList.size());
             StringBuilder sb = new StringBuilder();
             hashSet.add(sb.append(firstList.get(randomFirst)).append(secondList.get(secondRandom)).append(thirdList.get(thirdRandom)).toString());
+        }
+        return hashSet.toArray(new String[hashSet.size()]);
+    }
+
+    /**
+     * @Method: randomUserName
+     * @Description: 随机生成邮箱地址（不允许重复）
+     * @param
+     * @Return: java.lang.String
+     * @Author: chenlu
+     * @Date 2020/8/28 15:13
+     * @Version:  1.0
+     */
+    public static String randomEmail(){
+        StringBuilder result = new StringBuilder();
+        result.append(randomNumbersAndLowercase(10));
+        result.append("@");
+        result.append(randomNumbersAndLowercase(5));
+        result.append(".");
+        result.append(randomNumbersAndLowercase(3));
+        return result.toString().toLowerCase();
+    }
+
+    /**
+     * @Method: randomUserName
+     * @Description: 随机生成邮箱地址（不允许重复）
+     * @param size 随机生成邮箱地址个数
+     * @Return: java.lang.String
+     * @Author: chenlu
+     * @Date 2020/8/28 15:13
+     * @Version:  1.0
+     */
+    public static String[] randomEmail(Integer size){
+        HashSet<String> hashSet = new HashSet<>();
+        while(hashSet.size()<size){
+            hashSet.add(randomEmail());
         }
         return hashSet.toArray(new String[hashSet.size()]);
     }
