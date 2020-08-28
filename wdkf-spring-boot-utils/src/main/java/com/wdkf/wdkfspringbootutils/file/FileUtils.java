@@ -140,9 +140,8 @@ public class FileUtils {
                         }
                     }
                     if (!"".equals(tb.toString())) {
-                        text.add(tb.toString());
+                        text.add(tb.toString()+"\n");
                     }
-                    tb.append("\n");
                     contentLine = reader.readLine();
                 }
             }catch (IOException ioe) {
