@@ -28,7 +28,7 @@ public class DateUtils {
      * @Date 2020/8/27 14:23
      * @Version:  1.0
      */
-    public String longToDateString(Long time) {
+    public static String longToDateString(Long time) {
         return longToDateString(time, "yyyy-MM-dd HH:mm:ss");
     }
 
@@ -42,7 +42,7 @@ public class DateUtils {
      * @Date 2020/8/27 14:25
      * @Version:  1.0
      */
-    public String longToDateString(Long time, String form) {
+    public static String longToDateString(Long time, String form) {
         SimpleDateFormat format = new SimpleDateFormat(form);
         return format.format(new Date(time));
     }
@@ -56,7 +56,7 @@ public class DateUtils {
      * @Date 2020/8/27 14:26
      * @Version:  1.0
      */
-    public Date longToDate(Long time) {
+    public static Date longToDate(Long time) {
         return new Date(time);
     }
 
@@ -69,7 +69,7 @@ public class DateUtils {
      * @Date 2020/8/27 14:26
      * @Version:  1.0
      */
-    public Long dateToLong(Date date) {
+    public  static Long dateToLong(Date date) {
         return date.getTime();
     }
 
@@ -82,7 +82,7 @@ public class DateUtils {
      * @Date 2020/8/27 14:27
      * @Version:  1.0
      */
-    public String dateToString(Date date) {
+    public  static String dateToString(Date date) {
         return String.valueOf(date.getTime());
     }
 
@@ -95,7 +95,7 @@ public class DateUtils {
      * @Date 2020/8/27 14:29
      * @Version:  1.0
      */
-    public Long dateStringToLong(String date) throws Exception {
+    public  static Long dateStringToLong(String date) throws Exception {
         return dateStringToLong(date,"yyyy-MM-dd HH:mm:ss");
     }
 
@@ -109,7 +109,7 @@ public class DateUtils {
      * @Date 2020/8/28 10:15
      * @Version:  1.0
      */
-    public Long dateStringToLong(String date, String form) throws Exception {
+    public  static Long dateStringToLong(String date, String form) throws Exception {
 
         //设定入参时间格式
         SimpleDateFormat format = new SimpleDateFormat(form);
@@ -130,7 +130,7 @@ public class DateUtils {
      * @Date 2020/8/27 17:08
      * @Version:  1.0
      */
-    public String timeShift(String date) throws Exception {
+    public  static String timeShift(String date) throws Exception {
         return timeShift(date,"yyyy-MM-dd HH:mm:ss",true);
     }
 
@@ -145,7 +145,7 @@ public class DateUtils {
      * @Date 2020/8/27 17:08
      * @Version:  1.0
      */
-    public String timeShift(String date, String form) throws Exception {
+    public  static String timeShift(String date, String form) throws Exception {
         return timeShift(date ,form,true);
     }
 
@@ -161,7 +161,7 @@ public class DateUtils {
      * @Date 2020/8/27 17:08
      * @Version:  1.0
      */
-    public String timeShift(String date, String form, boolean flag) throws Exception {
+    public  static String timeShift(String date, String form, boolean flag) throws Exception {
         Random r = new Random();
         int number = r.nextInt(999999999);
         Long time = dateStringToLong(date,form);
@@ -185,7 +185,7 @@ public class DateUtils {
      * @Date 2020/8/28 10:24
      * @Version:  1.0
      */
-    public String timeShift(String date, int number, String item) throws Exception {
+    public  static String timeShift(String date, int number, String item) throws Exception {
         return timeShift(date, "yyyy-MM-dd HH:mm:ss",number, item, true);
     }
 
@@ -201,7 +201,7 @@ public class DateUtils {
      * @Date 2020/8/28 10:26
      * @Version:  1.0
      */
-    public String timeShift(String date, String form, int number, String item) throws Exception {
+    public  static String timeShift(String date, String form, int number, String item) throws Exception {
         return timeShift(date, form,number, item, true);
     }
 
@@ -218,7 +218,7 @@ public class DateUtils {
      * @Date 2020/8/28 10:26
      * @Version:  1.0
      */
-    public String timeShift(String date, String form, int number, String item, boolean flag) throws Exception {
+    public  static String timeShift(String date, String form, int number, String item, boolean flag) throws Exception {
         try {
             switch (item) {
                 case "years":
@@ -258,7 +258,7 @@ public class DateUtils {
      * @Date 2020/8/28 10:29
      * @Version:  1.0
      */
-    public String timeShift(String date, String form, Integer years, Integer months, Integer days, Integer hours, Integer minutes, Integer seconds, boolean flag) throws Exception {
+    public  static String timeShift(String date, String form, Integer years, Integer months, Integer days, Integer hours, Integer minutes, Integer seconds, boolean flag) throws Exception {
         //定义返回时间
         String resDate = "";
         long resTime = dateStringToLong(date,form);
