@@ -2,6 +2,9 @@ package com.wdkf.wdkfspringbootutils.random;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -273,16 +276,74 @@ public class RandomUtils {
     }
 
     /**
+     * @Method: fileToArray
+     * @Description: 将文件内容转成数组
+     * @param
+     * @Return:
+     * @Author: chenlu
+     * @Date 2020/8/27 15:08
+     * @Version:  1.0
+     */
+    public  List<String> fileToArray(String files){
+        File file = new File(files);
+        List<String> resList = new ArrayList<>();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
+            String s = null;
+            while((s = br.readLine())!=null){//使用readLine方法，一次读一行
+                String[] list =  s.split(" ");
+                for (int i = 0;i < list.length; i++){
+                    resList.add(list[i]);
+                }
+            }
+            br.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resList;
+    }
+
+    /**
      * @Method: randomUserName
      * @Description: 随机生成中文名字（不允许重复）
      * @param
      * @Return: java.lang.String
-     * @Author: wangdehonga
+     * @Author: chenlu
      * @Date 2020/8/27 15:13
      * @Version:  1.0
      */
-    public String randomUserName() {}
-
-    public String[] randomUserName(Integer size) {}
+    public String randomUserName() {
+        List<String> firstList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
+        List<String> secondList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
+        List<String> thirdList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
+        int randomFirst = new Random().nextInt(firstList.size());
+        int secondRandom = new Random().nextInt(secondList.size());
+        int thirdRandom = new Random().nextInt(thirdList.size());
+        StringBuilder sb = new StringBuilder();
+        return sb.append(firstList.get(randomFirst)).append(secondList.get(secondRandom)).append(thirdList.get(thirdRandom)).toString();
+    }
+    /**
+     * @Method: randomUserName
+     * @Description: 随机生成中文名字（不允许重复）
+     * @param
+     * @Return: java.lang.String
+     * @Author: chenlu
+     * @Date 2020/8/27 15:13
+     * @Version:  1.0
+     */
+    public String[] randomUserName(Integer size) {
+        HashSet<String> hashSet = new HashSet<>();
+        List<String> firstList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/firstname.txt");
+        List<String> secondList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/secondname.txt");
+        List<String> thirdList = fileToArray("com/wdkf/wdkfspringbootutils/random/name/thirdname.txt");
+        while(hashSet.size()<=size){
+            int randomFirst = new Random().nextInt(firstList.size());
+            int secondRandom = new Random().nextInt(secondList.size());
+            int thirdRandom = new Random().nextInt(thirdList.size());
+            StringBuilder sb = new StringBuilder();
+            hashSet.add(sb.append(firstList.get(randomFirst)).append(secondList.get(secondRandom)).append(thirdList.get(thirdRandom)).toString());
+        }
+        return (String[])hashSet.toArray();
+    }
 
 }
