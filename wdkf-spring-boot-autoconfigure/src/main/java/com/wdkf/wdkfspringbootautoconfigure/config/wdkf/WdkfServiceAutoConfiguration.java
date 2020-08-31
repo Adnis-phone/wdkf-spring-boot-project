@@ -42,7 +42,7 @@ public class WdkfServiceAutoConfiguration implements CommandLineRunner {
         System.out.println("\tApplication '"+appNameConfig.getName()+"' is running! Access URLs:");
         System.out.println("\tLocal: \t\thttp://localhost:"+hostConfig.getPort()+hostConfig.getServlet().getContextPath());
         System.out.println("\tExternal: \thttp://"+hostConfig.getUrl()+":"+hostConfig.getPort()+hostConfig.getServlet().getContextPath());
-        System.out.println("\tSwagger: \thttp://"+hostConfig.getUrl()+":"+hostConfig.getPort()+hostConfig.getServlet().getContextPath()+"/swagger-ui.html");
+        System.out.println("\tSwagger: \thttp://"+hostConfig.getUrl()+":"+hostConfig.getPort()+hostConfig.getServlet().getContextPath()+"/doc.html");
         System.out.println("\tProfile(s): \t\t["+profiles.getActive()+"]");
         System.out.println("----------------------------------------------------------");
     }
