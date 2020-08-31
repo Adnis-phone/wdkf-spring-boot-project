@@ -1,7 +1,8 @@
-package com.wdkf.wdkfspringbootautoconfigure.config.printhost;
+package com.wdkf.wdkfspringbootautoconfigure.properties.print;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Repository;
 
 /**
  * @ProjectName: wdkf-spring-boot-project
@@ -13,6 +14,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @Version: 1.0
  */
 @Data
+@Repository
 @ConfigurationProperties(prefix = "spring.profiles")
 public class Profiles {
     private String active;

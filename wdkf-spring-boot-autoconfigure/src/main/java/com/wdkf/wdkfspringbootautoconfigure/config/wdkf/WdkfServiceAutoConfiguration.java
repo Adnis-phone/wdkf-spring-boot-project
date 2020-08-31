@@ -1,19 +1,15 @@
 package com.wdkf.wdkfspringbootautoconfigure.config.wdkf;
 
-import com.wdkf.wdkfspringbootautoconfigure.config.printhost.AppNameConfig;
-import com.wdkf.wdkfspringbootautoconfigure.config.printhost.HostConfig;
-import com.wdkf.wdkfspringbootautoconfigure.config.printhost.Profiles;
-import com.wdkf.wdkfspringbootautoconfigure.properties.WdkfLocalBean;
-import com.wdkf.wdkfspringbootautoconfigure.service.WdkfService;
+import com.wdkf.wdkfspringbootautoconfigure.properties.print.AppNameConfig;
+import com.wdkf.wdkfspringbootautoconfigure.properties.print.HostConfig;
+import com.wdkf.wdkfspringbootautoconfigure.properties.print.Profiles;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -29,47 +25,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnWebApplication
 @EnableConfigurationProperties({AppNameConfig.class,HostConfig.class, Profiles.class})
-@ConditionalOnClass(WdkfLocalBean.class)
+@ConditionalOnClass({AppNameConfig.class,HostConfig.class, Profiles.class})
 public class WdkfServiceAutoConfiguration implements CommandLineRunner {
 
     @Autowired
-    private WdkfLocalBean wdkfLocalBean;
-
-
-
-    @Bean
-    public WdkfService wdkfService() {
-        WdkfService service = new WdkfService();
-        service.setWdkfLocalBean(wdkfLocalBean);
-        return service;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public WdkfLocalBean defaultWdkfLocalBean(AppNameConfig appNameConfig, HostConfig hostConfig ,Profiles profiles) {
-        WdkfLocalBean wdkfLocalBean = new WdkfLocalBean();
-        wdkfLocalBean.setName(appNameConfig.getName());
-        wdkfLocalBean.setPort(hostConfig.getPort());
-        wdkfLocalBean.setUrl(hostConfig.getUrl());
-        wdkfLocalBean.setActive(profiles.getActive());
-        return wdkfLocalBean;
-    }
+    private AppNameConfig appNameConfig;
+    @Autowired
+    private HostConfig hostConfig;
+    @Autowired
+    private Profiles profiles;
 
     @Override
     @ConditionalOnMissingBean
     public void run(String... args) throws Exception {
         System.out.println("----------------------------------------------------------");
-        System.out.println("\tApplication '"+wdkfLocalBean.getName()+"' is running! Access URLs:");
-        System.out.println("\tLocal: \t\thttp://localhost:"+wdkfLocalBean.getPort());
-        System.out.println("\tExternal: \thttp://"+wdkfLocalBean.getUrl()+":"+wdkfLocalBean.getPort());
-        System.out.println("\tProfile(s): \t\t["+wdkfLocalBean.getActive()+"]");
+        System.out.println("\tApplication '"+appNameConfig.getName()+"' is running! Access URLs:");
+        System.out.println("\tLocal: \t\thttp://localhost:"+hostConfig.getPort()+hostConfig.getServlet().getContextPath());
+        System.out.println("\tExternal: \thttp://"+hostConfig.getUrl()+":"+hostConfig.getPort()+hostConfig.getServlet().getContextPath());
+        System.out.println("\tSwagger: \thttp://"+hostConfig.getUrl()+":"+hostConfig.getPort()+hostConfig.getServlet().getContextPath()+"/swagger-ui.html");
+        System.out.println("\tProfile(s): \t\t["+profiles.getActive()+"]");
         System.out.println("----------------------------------------------------------");
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public WdkfService Service () {
-        return new WdkfService();
-    }
 
 }

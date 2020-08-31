@@ -1,4 +1,4 @@
-package com.wdkf.wdkfspringbootautoconfigure.config.printhost;
+package com.wdkf.wdkfspringbootautoconfigure.properties.print;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,12 +21,20 @@ import java.net.UnknownHostException;
 
 //@ConfigurationProperties(prefix = "server")
 @Data
+@Repository
 @ConfigurationProperties(prefix = "server")
 public class HostConfig {
     private String url = InetAddress.getLocalHost().getHostAddress();
 
     private String port;
+    private Servlet servlet;
 
     public HostConfig() throws UnknownHostException {
+    }
+
+    @Data
+    public static class Servlet {
+
+        private String contextPath;
     }
 }

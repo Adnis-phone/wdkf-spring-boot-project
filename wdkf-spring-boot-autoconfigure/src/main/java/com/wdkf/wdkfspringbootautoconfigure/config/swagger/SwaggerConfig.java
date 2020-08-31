@@ -42,9 +42,9 @@ public class SwaggerConfig {
                 //设置文档标题(API名称)
                 .title("无敌开发小组通用后端接口说明")
                 //文档描述
-                .description("wdkf通用架构")
+                .description("无敌开发小组专用架构")
                 //版本号
-                .version("架构版本：v0.1.0")
+                .version("架构版本：v0.3.1")
                 .build();
     }
 }

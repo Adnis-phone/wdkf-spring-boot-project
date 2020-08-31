@@ -1,4 +1,4 @@
-package com.wdkf.wdkfspringbootautoconfigure.config.redis;
+package com.wdkf.wdkfspringbootautoconfigure.properties.redis;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
