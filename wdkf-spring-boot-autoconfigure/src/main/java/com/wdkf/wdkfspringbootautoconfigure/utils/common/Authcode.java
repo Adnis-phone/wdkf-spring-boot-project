@@ -6,6 +6,7 @@ import com.wdkf.wdkfspringbootautoconfigure.utils.redis.RedisUtil;
 import com.wdkf.wdkfspringbootutils.structuretransform.ObjectToMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -47,14 +48,18 @@ public class Authcode {
         String totilToken = null;
         GetMyToken getMyToken = new GetMyToken();
         Map<String, Object> map = new ObjectToMap().getKeyAndValue(object);
+        String doMain = new DoMain().getDoMain(request);
+        String appName = new DoMain().getAppName(request);
         String userId = Optional.ofNullable(map.get("userId").toString()).orElse(null);
         String ua = Optional.ofNullable(new GetUA().getUA(request)).orElse(null);
         String token = Optional.ofNullable(new GetMyToken().getToken()).orElse(null);
-        totilToken = userId + ":"
+        totilToken = doMain + ":"
+                + appName + ":"
+                + userId + ":"
                 + ua + ":"
                 + token;
         //check缓存是否存在
-        Set<String> keys = redisUtil.getKeysList(userId + ":" + ua + "*");
+        Set<String> keys = redisUtil.getKeysList(doMain+ ":"  + "*" + ":"  + userId + ":" + ua + "*");
         if (!CollectionUtils.isEmpty(keys)) {
             redisUtil.del(keys);
         }
