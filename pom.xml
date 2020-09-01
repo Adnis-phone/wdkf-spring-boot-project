@@ -13,7 +13,7 @@
     <groupId>com.wdkf</groupId>
     <artifactId>wdkf-spring-boot-project</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2-beta</version>
+    <version>cloud-1.0.0</version>
 
     <properties>
         <revision>0.0.2-beta</revision>

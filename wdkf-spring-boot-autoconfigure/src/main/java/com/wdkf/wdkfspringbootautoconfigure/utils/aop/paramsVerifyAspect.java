@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  * @Date: 2020/7/6 16:44
  * @Version: 1.0
  */
-@Order(2)
+@Order(1)
 @Aspect
 @Slf4j
 @Component

@@ -25,7 +25,7 @@ import java.util.Optional;
  * @Date: 2020/7/5 21:17
  * @Version: 1.0
  */
-@Order(3)
+@Order(2)
 @Aspect
 @Slf4j
 @Component

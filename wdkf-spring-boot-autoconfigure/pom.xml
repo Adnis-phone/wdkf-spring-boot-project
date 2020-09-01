@@ -5,14 +5,14 @@
     <parent>
         <groupId>com.wdkf</groupId>
         <artifactId>wdkf-spring-boot-parent</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>wdkf-cloud-1.0.0</version>
         <relativePath>../wdkf-spring-boot-parent/pom.xml</relativePath>
     </parent>
 
 
     <groupId>com.wdkf</groupId>
     <artifactId>wdkf-spring-boot-autoconfigure</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>wdkf-cloud-1.0.0</version>
     <packaging>jar</packaging>
     <name>wdkf-spring-boot-autoconfigure</name>
     <description>Demo project for Spring Boot</description>
