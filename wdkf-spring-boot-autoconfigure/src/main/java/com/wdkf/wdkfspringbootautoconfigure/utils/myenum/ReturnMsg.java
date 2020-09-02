@@ -85,6 +85,14 @@ public enum ReturnMsg {
     THE_OPERATION_WAS_SUCCESSFUL(10000, "操作成功！"),
 
 
+    /**
+     * 判断请求类型
+     */
+    REQUEST_LOGIN_SUCESS(7001,"登录成功"),
+    REQUEST_LOGIN_FAIL(7002,"登录失败,请校验账号密码"),
+    REQUEST_AUTH_SUCESS(7003,"auth认证成功，可以访问"),
+    REQUEST_AUTH_FAIL(7004,"auth认证失败，拒绝访问"),
+
     ;
 
 
