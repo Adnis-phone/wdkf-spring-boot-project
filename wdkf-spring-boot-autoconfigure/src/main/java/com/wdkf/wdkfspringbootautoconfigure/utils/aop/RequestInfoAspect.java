@@ -1,5 +1,6 @@
 package com.wdkf.wdkfspringbootautoconfigure.utils.aop;
 
+import com.wdkf.wdkfspringbootautoconfigure.utils.common.DoMain;
 import com.wdkf.wdkfspringbootautoconfigure.utils.common.GetUA;
 import com.wdkf.wdkfspringbootautoconfigure.utils.redis.RedisUtil;
 import com.wdkf.wdkfspringbootautoconfigure.utils.thread.AgentThreadLocal;
@@ -74,9 +75,10 @@ public class RequestInfoAspect {
             }
         }
         //获取操作人信息
+        String doMain = new DoMain().getDoMain(request);
         auth = getUA.getUA(request) + ":" + auth;
         try {
-            Set<String> keys = redisUtil.getKeysList("*" + auth);
+            Set<String> keys = redisUtil.getKeysList(doMain+ ":"  + "*"  +auth);
             Object[] objects = keys.toArray();
             auth = (String) objects[0];
             Map<String, Object> map = new ObjectToMap().getKeyAndValue(redisUtil.get(auth));
